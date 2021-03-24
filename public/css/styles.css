@@ -1,0 +1,36 @@
+body{
+    background-color: #B3E0FF;
+    font-family: 'Segoe UI';
+}
+
+label{
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 5px !important;
+}
+
+input,
+.form-control{
+    background-color: inherit !important;
+    border: none !important;
+    border-radius: 0px !important;
+    border-bottom: 2px solid black !important;
+}
+
+input:focus{
+    border: 2px solid rgb(37, 179, 124) !important;
+    box-shadow: none !important;
+}
+
+input:active{
+    background-color: inherit !important;
+}
+
+.btn{
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.error{
+    display: none;
+}
