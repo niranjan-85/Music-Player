@@ -17,25 +17,31 @@
                     <img src="/images/bodyimg.jpg" alt="" class="w-100">
                 </div>
                 <!-- Right Side  -->
-                <div class="col-lg-6 mt-5 mx-4">
+                <div class="col-lg-6 mt-5 mx-5">
                     <h1 class="mb-4">Register</h1>
                     <div class="error mb-2">
                         <div class="alert alert-danger" role="alert">
                             <span id="error-msg"></span>
                         </div>
                     </div>
-                    <form id="submit"> 
+                    <div class="alert alert-danger" role="alert">
+                        <% if (is_error){%>
+                            <span id="errork" class="d-block"><%= error_msg %></span>
+                        <% } %>
+                    </div>
+                    
+                    <form action="/users" method="POST" id="submit"> 
                         <div class="form-group mb-3">
                             <label for="exampleInputEmail1">Full Name <span class="text-danger">  *</span></label>
-                            <input type="text" class="form-control " id="name" aria-describedby="emailHelp" validate>
+                            <input type="text" class="form-control " id="name" aria-describedby="emailHelp" name="name">
                           </div>
                         <div class="form-group mb-3">
                           <label for="exampleInputEmail1">Username <span class="text-danger">  *</span></label>
-                          <input type="text" class="form-control " id="username" aria-describedby="emailHelp">
+                          <input type="text" class="form-control " id="username" aria-describedby="emailHelp" name="Username">
                         </div>
                         <div class="form-group mb-3">
                           <label for="exampleInputPassword1">Password <span class="text-danger">  *</span></label>
-                          <input type="password" class="form-control " id="password">
+                          <input type="password" class="form-control " id="password" name="password">
                         </div>
                         <div class="form-group mb-5">
                             <label for="exampleInputPassword1">Confirm Password <span class="text-danger">  *</span></label>
