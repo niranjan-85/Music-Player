@@ -1,5 +1,4 @@
-// Dom elements 
-console.log("Dasd")
+// Dom elements
 
 const SubmitBtn = document.getElementById('submit');
 const Username = document.getElementById('username');
@@ -14,7 +13,6 @@ const MessageElem = document.getElementById('error-msg')
 const INPUT_ERR = "Invalid Input";
 const PASSWORD_ERR = "Password should be atleast 8 characters long";
 const MATCH_ERR = "Passwords do not match"
-const SUCCESS = "Successful"
 
 
 function CheckError(password,cpass){
@@ -35,9 +33,6 @@ function CheckError(password,cpass){
 
 function PropogateMessage(isvalid,message){
     ErrorElem.style.display = "block";
-    if(isvalid){
-        AlertElem.classList.replace('alert-danger','alert-success');
-    }
     MessageElem.innerHTML = message;
 }
 
@@ -55,8 +50,5 @@ SubmitBtn.addEventListener('submit',(event)=>{
     if(isInvalid(Username.value,Password.value,ConfirmPassword.value,Name.value)){
         event.preventDefault();
         event.stopPropagation();
-    }
-    else{
-        PropogateMessage(1,SUCCESS)
     }
 })

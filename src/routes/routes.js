@@ -7,7 +7,7 @@ const Router = express.Router();
 
 // homepage
 Router.get('/',(req,res)=>{
-    res.render('index.ejs',{is_error:0});
+    res.render('index.ejs');
 })
 
 // handle Register 
@@ -15,7 +15,8 @@ Router.post('/users',async (req,res)=>{
     let {name,Username,password } = req.body
     User = await UserModel.findOne({Username : Username});
     if(User){
-        res.render('index.ejs',{is_error:1,error_msg:"User Already Exists"});
+        req.flash('user_error_msg','User already exists');
+        res.redirect('/');
     }
     else{
         //Create a new user model
@@ -35,14 +36,26 @@ Router.post('/users',async (req,res)=>{
 
                 // saving to db
                 newUser.save()
-                    .then(()=>{console.log("user added to db")})
-                    .catch((error)=>{console.log("Error while updating db")})
+                    .then(()=>{
+                        console.log("user added to db")
+                        req.flash('success_msg','Registered Successfully');
+                        res.redirect('/users/login')
+                    })
+                    .catch((error)=>{
+                        console.log("Error while updating db")
+                        req.flash('server_error_msg','Error While registering. Please try later');
+                        res.redirect('/users/login')
+                    })
             })
         });
 
     }
-
-
 });
+
+// handle Login : 
+
+Router.get('/users/login',(req,res)=>{
+    res.render('login.ejs');
+})
 
 module.exports = Router;

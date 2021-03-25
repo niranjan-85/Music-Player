@@ -18,38 +18,36 @@
                 </div>
                 <!-- Right Side  -->
                 <div class="col-lg-6 mt-5 mx-5">
-                    <h1 class="mb-4">Register</h1>
+                    <h1 class="mb-4">Login</h1>
                     <div class="error mb-2">
                         <div class="alert alert-danger" role="alert">
                             <span id="error-msg"></span>
                         </div>
                     </div>
 
-                    <% if(user_error_msg != '') { %>
+                    <% if(success_msg != '') { %>
+                        <div class="alert alert-success" role="alert">
+                            <%= success_msg %>
+                        </div>
+                    <% } %>
+                    
+                    <% if(server_error_msg != '') { %>
                         <div class="alert alert-danger" role="alert">
-                            <%= user_error_msg %>
+                            <%= success_msg %>
                         </div>
                     <% } %>
                     
                     <form action="/users" method="POST" id="submit"> 
                         <div class="form-group mb-3">
-                            <label for="exampleInputEmail1">Full Name <span class="text-danger">  *</span></label>
-                            <input type="text" class="form-control " id="name" aria-describedby="emailHelp" name="name">
-                          </div>
-                        <div class="form-group mb-3">
                           <label for="exampleInputEmail1">Username <span class="text-danger">  *</span></label>
                           <input type="text" class="form-control " id="username" aria-describedby="emailHelp" name="Username">
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-5">
                           <label for="exampleInputPassword1">Password <span class="text-danger">  *</span></label>
                           <input type="password" class="form-control " id="password" name="password">
                         </div>
-                        <div class="form-group mb-5">
-                            <label for="exampleInputPassword1">Confirm Password <span class="text-danger">  *</span></label>
-                            <input type="password" class="form-control " id="confirmpassword">
-                        </div>
-                        <button type="submit" class="btn btn-primary" >Register</button>
-                        <button type="submit" class="btn btn-primary">Already have an Account ?</button>
+                        <button type="submit" class="btn btn-primary" >Login</button>
+                        <button type="submit" class="btn btn-primary">Sign up for free</button>
                     </form>
                 </div>
             </div>
@@ -61,3 +59,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </body>
 </html>
+
