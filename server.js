@@ -1,11 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
 const router = require('./src/routes/routes')
 const flash = require('connect-flash');
 const sessions = require('express-session')
+require('./src/config/passportconfig')(passport);
+
 
 const app = express();
 const PORT = process.env.PORT || 5000 ;
+
+// Passport config
 
 // static files 
 app.use(express.static('public'));
@@ -23,9 +29,13 @@ app.use(express.urlencoded({ extended: false }));
 //sessions 
 app.use(sessions({
     secret:"my secretkey",
-    resave:true,
-    saveUninitialized:true,
+    resave:false,
+    saveUninitialized:false,
 }))
+
+// Passport middlewares 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Flash messages
 app.use(flash())
@@ -35,6 +45,7 @@ app.use((req,res,next)=>{
     res.locals.success_msg = req.flash("success_msg");
     res.locals.user_error_msg = req.flash("user_error_msg");
     res.locals.server_error_msg = req.flash("server_error_msg");
+    res.locals.error = req.flash("error");
     next();
 })
 
@@ -49,6 +60,7 @@ mongoose.connect(mongoURI,{useNewUrlParser:true,useUnifiedTopology: true })
 app.get('/',router)
 app.post('/users',router)
 app.get('/users/login',router)
+app.post('/users/login',router);
 
 
 // Server 
