@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const UserModel = require('../../models/user')
+const {isAuth,notAuth} = require('../config/helper');
 const Router = express.Router();
 
 // Handiling Routes :-
@@ -55,8 +56,7 @@ Router.post('/users',async (req,res)=>{
 
 // handle Login : 
 
-Router.post('/users/login',(req,res,next)=>{
-    console.log(req)
+Router.post('/users/login',notAuth,(req,res,next)=>{
     passport.authenticate('local',{
         successRedirect:'/dashboard',
         failureRedirect:'/users/login',
@@ -65,8 +65,20 @@ Router.post('/users/login',(req,res,next)=>{
 
 });
 
-Router.get('/users/login',(req,res)=>{
+Router.get('/users/login',notAuth,(req,res)=>{
     res.render('login.ejs',{messages:null});
+})
+
+// Main application route:
+Router.get('/dashboard',isAuth,(req,res)=>{
+    res.render('app.ejs')
+})
+
+//Handle logout :
+
+Router.get('/logout',(req,res)=>{
+    req.logOut();
+    res.redirect('/users/login');
 })
 
 module.exports = Router;

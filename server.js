@@ -58,8 +58,10 @@ mongoose.connect(mongoURI,{useNewUrlParser:true,useUnifiedTopology: true })
 //Routes 
 
 app.get('/',router)
-app.post('/users',router)
 app.get('/users/login',router)
+app.get('/dashboard',router)
+app.get('/logout',router)
+app.post('/users',router)
 app.post('/users/login',router);
 
 
